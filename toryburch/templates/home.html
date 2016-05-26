@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="jumbo">
+    <h2>Welcome to the Tory Burch<h2>
+    <h3>These are on sales<h3>
+  </div>
+<!--
+  <ul class=entries>
+  {% for entry in entries %}
+    <li><h2>{{ entry.NAME }}</h2>{{ entry.DESC|safe }}
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul>
+-->
+<table summary="data table" class="sofT" cellspacing="0">
+<tr>
+	<td colspan="7" class="helpHed">Tory Burch</td>
+</tr>
+<tr>
+	<td class="helpHed">Category</td>
+	<td class="helpHed">Name</td>
+	<td class="helpHed">Description</td>
+	<td class="helpHed">Standard Price</td>
+	<td class="helpHed">Sales Price</td>
+	<td class="helpHed">Created</td>
+	<td class="helpHed">Last Updated</td>
+</tr>
+  {% for entry in entries %}
+<tr>
+	<td>{{ entry.CATEGORY }}</td>
+	<td>{{ entry.NAME }}</td>
+	<td>{{ entry.DESC|safe }}</td>
+	<td>{{ entry.STANDARD_PRICE }}</td>
+	<td>{{ entry.SALES_PRICE }}</td>
+	<td>{{ entry.CREATED }}</td>
+	<td>{{ entry.LAST_UPD }}</td>
+</tr>
+  {% else %}
+<tr>
+	<td colspan="4" class="helpHed">Unbelievable.  No entries here so far</td>
+</tr>
+  {% endfor %}
+</table>
+{% endblock %}
+
+CATEGORY, NAME, STANDARD_PRICE, SALES_PRICE, DESC, URL, IMG_URL, CREATED, LAST_UPD
