@@ -12,6 +12,7 @@ import os
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
+import copy
 
 
 # create our little application :)
@@ -28,10 +29,17 @@ app.config.update(dict(
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
+
 def connect_db():
     """Connects to the specific database."""
     rv = sqlite3.connect(app.config['DATABASE'])
-    rv.row_factory = sqlite3.Row
+    rv.row_factory = dict_factory   #sqlite3.Row
     return rv
 
 
@@ -76,9 +84,34 @@ def close_db(error):
 @app.route('/')
 def home():
     db = get_db()
-    cur = db.execute('SELECT CATEGORY, NAME, STANDARD_PRICE, SALES_PRICE, DESC, URL, IMG_URL, CREATED, LAST_UPD FROM TORYBURCH;')
-    entries = cur.fetchall()
-    return render_template('home.html', entries=entries)
+    # cur = db.execute('SELECT PROD.CATEGORY, PROD.NAME, PROD.DESC, PROD.URL'
+    #                  ', PROD.IMG_URL, PRICE.STANDARD_PRICE, PRICE.SALES_PRICE'
+    #                  ', PRICE.CREATED, PRICE.LAST_UPD '
+    #                  'FROM TORY_PROD PROD, TORY_PRICE PRICE '
+    #                  'WHERE PROD.ROW_ID = PRICE.PAR_ROW_ID AND PROD.ROW_ID = 1;')
+    # entries = cur.fetchall()
+    # return render_template('home.html', entries=entries)
+
+    sql_prod = 'SELECT ROW_ID, CATEGORY, NAME, DESC, IMG_URL, URL' \
+               ', STANDARD_PRICE, SALES_PRICE, LAST_UPD ' \
+               'FROM TORY_PROD ' \
+               'WHERE SALES_PRICE <> \'$0\';'
+    cur_prod = db.execute(sql_prod)
+    prods = cur_prod.fetchall()
+    for prod in prods:
+        prod_id = prod["ROW_ID"]
+        sql_price = 'SELECT STANDARD_PRICE, SALES_PRICE, CREATED, LAST_UPD ' \
+                    'FROM TORY_PRICE ' \
+                    'WHERE PAR_ROW_ID = :PAR_ROW_ID;'
+        cur_price = db.execute(sql_price, {"PAR_ROW_ID": prod_id})
+        prices = cur_price.fetchall()
+        prod['PRICE'] = prices
+        # prods.append(prod)
+        # prod_list = list(prods[prod_n])
+        # prod_list.append(prices)
+    #     prods[prod_n] = (100, 200, 300)
+    return render_template('home.html', entries=prods)
+
 
 
 @app.route('/about')

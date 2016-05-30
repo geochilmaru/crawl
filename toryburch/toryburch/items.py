@@ -9,6 +9,7 @@ import scrapy
 
 class ToryburchItem(scrapy.Item):
     # define the fields for your item here like:
+    category = scrapy.Field()
     name = scrapy.Field()
     desc = scrapy.Field()
     url = scrapy.Field()

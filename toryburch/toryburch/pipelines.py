@@ -24,26 +24,69 @@ class ToryburchPipeline(object):
 
     def process_item(self, item, spider):
         # return item
-        sql_sel = "SELECT * FROM TORYBURCH WHERE NAME = :DESC"
-        # print "SELECT * FROM TORY_HANDBAGS WHERE NAME = %s" % str(item['name'][0].encode('utf-8'))
-        self.cursor.execute(sql_sel, {"DESC":str(item['desc'][0].encode('utf-8'))})
-        result = self.cursor.fetchone()
+        sql_sel_prod = "SELECT ROW_ID FROM TORY_PROD" \
+                       " WHERE TRIM(NAME) = :NANE" \
+                       " OR TRIM(DESC) = :DESC;"
+        self.cursor.execute(sql_sel_prod, {"NANE": str(item['name'][0].encode('utf-8')).strip(),
+                                           "DESC": str(item['desc'][0].encode('utf-8')).strip()})
+        result_prod = self.cursor.fetchone()
 
-        if result:
-            # print "data already exist"
-            pass
+        if result_prod:
+            prod_id = result_prod[0]
+            sql_sel_price = "SELECT ROW_ID FROM TORY_PRICE" \
+                            " WHERE PAR_ROW_ID = :PROD_ID" \
+                            " AND STANDARD_PRICE = :STANDARD_PRICE" \
+                            " AND SALES_PRICE = :SALES_PRICE;"
+            self.cursor.execute(sql_sel_price, {"PROD_ID": prod_id,
+                                                "STANDARD_PRICE": str(item['standard_price'][0].encode('utf-8')).strip(),
+                                                "SALES_PRICE": str(item['sales_price'][0].encode('utf-8')).strip()})
+            result_price = self.cursor.fetchone()
+
+            if result_price:
+                pass
+            else:
+                try:
+                    sql_ins_price = "INSERT INTO TORY_PRICE(PAR_ROW_ID, STANDARD_PRICE, SALES_PRICE" \
+                          ", CREATED, LAST_UPD) VALUES (:PAR_ROW_ID, :STANDARD_PRICE, :SALES_PRICE" \
+                          ", DATETIME('NOW', 'LOCALTIME'), DATETIME('NOW', 'LOCALTIME'));"
+                    self.cursor.execute(sql_ins_price, {"PAR_ROW_ID": prod_id
+                        , "STANDARD_PRICE": str(item['standard_price'][0].encode('utf-8'))
+                        , "SALES_PRICE": str(item['sales_price'][0].encode('utf-8'))})
+                    self.conn.commit()
+                except sqlite3.Error, e:
+                    print "Error %d: %s" % (e.args[0], e.args[1])
+                    return item
         else:
             try:
-                sql = "INSERT INTO TORYBURCH(NAME, STANDARD_PRICE, SALES_PRICE, DESC, URL, IMG_URL" \
-                      ", CREATED, LAST_UPD) VALUES (:NAME, :STANDARD_PRICE, :SALES_PRICE, :DESC" \
-                      ", :URL, :IMG_URL, DATETIME('NOW', 'LOCALTIME'), DATETIME('NOW', 'LOCALTIME'));"
-                self.cursor.execute(sql, {"NAME":str(item['name'][0].encode('utf-8'))
-                    , "STANDARD_PRICE":str(item['standard_price'][0].encode('utf-8'))
-                    , "SALES_PRICE":str(item['sales_price'][0].encode('utf-8'))
+                sql_ins_prod = "INSERT INTO TORY_PROD(CATEGORY, NAME, DESC, URL, IMG_URL" \
+                      ", STANDARD_PRICE, SALES_PRICE, CREATED, LAST_UPD)" \
+                      " VALUES (:CATEGORY, :NAME, :DESC, :URL, :IMG_URL" \
+                      ", :STANDARD_PRICE, :SALES_PRICE " \
+                      ", DATETIME('NOW', 'LOCALTIME'), DATETIME('NOW', 'LOCALTIME'));"
+                self.cursor.execute(sql_ins_prod, {"CATEGORY":str(item['category'].encode('utf-8'))
+                    , "NAME":str(item['name'][0].encode('utf-8'))
                     , "DESC":str(item['desc'][0].encode('utf-8'))
                     , "URL":str(item['url'][0].encode('utf-8'))
                     , "IMG_URL":str(item['img_url'][0].encode('utf-8'))
+                    , "STANDARD_PRICE":str(item['standard_price'][0].encode('utf-8'))
+                    , "SALES_PRICE":str(item['sales_price'][0].encode('utf-8'))
                                   })
+                prod_id = self.cursor.lastrowid
+                self.conn.commit()
+                # sql_sel_prod = "SELECT ROW_ID FROM TORY_PROD" \
+                #                " WHERE TRIM(NAME) = :NANE" \
+                #                " OR TRIM(DESC) = :DESC;"
+                # self.cursor.execute(sql_sel_prod, {"NANE": str(item['name'][0].encode('utf-8')).strip(),
+                #                                    "DESC": str(item['desc'][0].encode('utf-8')).strip()})
+                # result_prod = self.cursor.fetchone()
+                # prod_id = result_prod[0]
+
+                sql_ins_price = "INSERT INTO TORY_PRICE(PAR_ROW_ID, STANDARD_PRICE, SALES_PRICE" \
+                                ", CREATED, LAST_UPD) VALUES (:PAR_ROW_ID, :STANDARD_PRICE, :SALES_PRICE" \
+                                ", DATETIME('NOW', 'LOCALTIME'), DATETIME('NOW', 'LOCALTIME'));"
+                self.cursor.execute(sql_ins_price, {"PAR_ROW_ID": prod_id
+                    , "STANDARD_PRICE": str(item['standard_price'][0].encode('utf-8'))
+                    , "SALES_PRICE": str(item['sales_price'][0].encode('utf-8'))})
                 self.conn.commit()
             except sqlite3.Error, e:
                 print "Error %d: %s" % (e.args[0], e.args[1])
