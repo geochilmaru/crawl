@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4c25e3b3-38b0-4a9a-a613-6efd36f84535" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toryburch/db/toryburch.db" afterPath="$PROJECT_DIR$/toryburch/db/toryburch.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toryburch/db/schema.sql" afterPath="$PROJECT_DIR$/toryburch/db/schema.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toryburch/list.py" afterPath="$PROJECT_DIR$/toryburch/list.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toryburch/static/main.css" afterPath="$PROJECT_DIR$/toryburch/static/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toryburch/templates/home.html" afterPath="$PROJECT_DIR$/toryburch/templates/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toryburch/toryburch/items.py" afterPath="$PROJECT_DIR$/toryburch/toryburch/items.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toryburch/toryburch/pipelines.py" afterPath="$PROJECT_DIR$/toryburch/toryburch/pipelines.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toryburch/toryburch/spiders/TorySpider.py" afterPath="$PROJECT_DIR$/toryburch/toryburch/spiders/TorySpider.py" />
     </list>
@@ -35,8 +31,8 @@
       <file leaf-file-name="list.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/toryburch/list.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="94" column="65" selection-start-line="94" selection-start-column="65" selection-end-line="94" selection-end-column="65" />
+            <state relative-caret-position="210">
+              <caret line="82" column="65" selection-start-line="82" selection-start-column="65" selection-end-line="82" selection-end-column="65" />
               <folding>
                 <element signature="e#238#247#0" expanded="true" />
               </folding>
@@ -47,8 +43,8 @@
       <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toryburch/toryburch/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="58" column="13" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
+            <state relative-caret-position="266">
+              <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -57,8 +53,8 @@
       <file leaf-file-name="TorySpider.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toryburch/toryburch/spiders/TorySpider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
-              <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+            <state relative-caret-position="1134">
+              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding>
                 <element signature="e#25#38#0" expanded="true" />
               </folding>
@@ -543,28 +539,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/toryburch/toryburch/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="58" column="13" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/toryburch/toryburch/spiders/TorySpider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+        <state relative-caret-position="1134">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding>
             <element signature="e#25#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/toryburch/toryburch/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/toryburch/list.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="94" column="65" selection-start-line="94" selection-start-column="65" selection-end-line="94" selection-end-column="65" />
+        <state relative-caret-position="210">
+          <caret line="82" column="65" selection-start-line="82" selection-start-column="65" selection-end-line="82" selection-end-column="65" />
           <folding>
             <element signature="e#238#247#0" expanded="true" />
           </folding>

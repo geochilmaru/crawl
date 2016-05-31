@@ -52,18 +52,3 @@ class TorySpider(scrapy.Spider):
             # yield item
             items.append(item)
         return items
-
-            # yield item
-
-            # CREATE TABLE TORYBURCH(ROW_ID INTEGER PRIMARY KEY AUTOINCREMENT, CATEGORY VARCHAR(100), NAME VARCHAR(100), STANDARD_PRICE VARCHAR(100), SALES_PRICE VARCHAR(100), DESC VARCHAR(100), URL VARCHAR(100), IMG_URL VARCHAR(100), CREATED DATE, LAST_UPD DATE);
-            # sql = "INSERT INTO TORY_HANDBAGS(NAME, STANDARD_PRICE, SALES_PRICE, DESC, URL, IMG_URL" \
-            #       ", CREATED, LAST_UPD) VALUES (:NAME, :STANDARD_PRICE, :SALES_PRICE, :DESC" \
-            #       ", :URL, :IMG_URL, DATETIME('NOW', 'LOCALTIME'), DATETIME('NOW', 'LOCALTIME'));"
-            # cur.execute(sql, {"NAME":name[0], "STANDARD_PRICE":standard_price[0], "SALES_PRICE":sales_price[0], "DESC":desc[0], "URL":url[0], "IMG_URL":img_url[0]})
-            # sql = "INSERT INTO TORY_HANDBAGS(NAME) VALUES (:NAME);"
-            # cur.execute(sql, {"NAME": name[0]})
-            # conn.commit()
-
-        # conn.close()
-
-            # scrapy crawl toryburch -o re.csv -t csv
