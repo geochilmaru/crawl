@@ -74,14 +74,30 @@ def close_db(error):
         g.sqlite_db.close()
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
+    errors = []
+    sort_arrow = {'DESC ASC':'white', 'DESC DESC':'white',
+                  'STANDARD_PRICE ASC':'white', 'STANDARD_PRICE DESC':'white',
+                  'SALES_PRICE ASC':'white', 'SALES_PRICE DESC':'white',
+                  'LAST_UPD ASC':'white', 'LAST_UPD DESC':'white'}
+    if request.method == 'POST':
+        order_by = 'DESC ASC'
+        try:
+            order_by = request.form['sort']
+        except:
+            errors.append("Please make sure it's valid and try again")
+    else:
+        order_by = 'DESC ASC'
+    sort_arrow[order_by] = 'red'
+
     db = get_db()
-    sql_prod = 'SELECT ROW_ID, CATEGORY, NAME, DESC, IMG_URL, URL' \
+    sql_prod = 'SELECT ROW_ID, \''+order_by+'\', NAME, DESC, IMG_URL, URL' \
                ', STANDARD_PRICE, SALES_PRICE, LAST_UPD ' \
                'FROM TORY_PROD ' \
-               'WHERE SALES_PRICE <> \'$0\' AND STATUS=\'ACTIVE\'' \
-               'ORDER BY DESC;'
+               'WHERE SALES_PRICE <> \'$0\' AND STATUS=\'ACTIVE\' ' \
+               'ORDER BY '+ order_by
+               # 'ORDER BY :ORDER_BY;'.format(ORDER_BY="SALES_PRICE")
     cur_prod = db.execute(sql_prod)
     prods = cur_prod.fetchall()
     # for prod in prods:
@@ -92,7 +108,14 @@ def home():
     #     cur_price = db.execute(sql_price, {"PAR_ROW_ID": prod_id})
     #     prices = cur_price.fetchall()
     #     prod['PRICE'] = prices
-    return render_template('home.html', entries=prods)
+    return render_template('home.html', entries=prods, errors=errors, sort=sort_arrow)
+
+
+@app.route('/sort', methods=['POST'])
+def sort_query():
+    sort = [request.form['sort']]
+    # return sort[0]
+    return redirect(url_for('home', sort=sort[0]))
 
 
 @app.route('/about')
