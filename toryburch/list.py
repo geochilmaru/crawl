@@ -92,7 +92,7 @@ def home():
     sort_arrow[order_by] = 'red'
 
     db = get_db()
-    sql_prod = 'SELECT ROW_ID, \''+order_by+'\', NAME, DESC, IMG_URL, URL' \
+    sql_prod = 'SELECT ROW_ID, CATEGORY, NAME, DESC, IMG_URL, URL' \
                ', STANDARD_PRICE, SALES_PRICE, LAST_UPD ' \
                'FROM TORY_PROD ' \
                'WHERE SALES_PRICE <> \'$0\' AND STATUS=\'ACTIVE\' ' \
