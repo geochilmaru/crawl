@@ -19,10 +19,13 @@ class TorySpider(scrapy.Spider):
         hxs = Selector(response)
         selects = []
         selects = hxs.xpath('//ol[@typeof="BreadcrumbList"]')
-        cate = []
-        for sel in selects:
-            cate = sel.xpath('li[@property="itemListElement"]/a/span/text()').extract()
-        category = ">".join(cate)
+        # cate = []
+        # cate_url = ""
+        for index in range(len(selects)):
+            cate = selects[index].xpath('li[@property="itemListElement"]/a/span/text()').extract()
+            cate_url = selects[index].xpath('li[@property="itemListElement"]/a/@href').extract()
+        category = "> ".join(cate)
+        category_url = cate_url.pop()
         selects = []
         selects = hxs.xpath('//div[@class="producttile-inner"]')
         items = []
@@ -43,6 +46,7 @@ class TorySpider(scrapy.Spider):
                 sales_price = ['$0',]
 
             item["category"] = category
+            item["category_url"] = category_url
             item["name"] = name
             item["standard_price"] = standard_price
             item["sales_price"] = sales_price

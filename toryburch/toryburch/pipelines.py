@@ -81,12 +81,14 @@ class ToryburchPipeline(object):
                     return item
         else:
             try:
-                sql_ins_prod = "INSERT INTO TORY_PROD(CATEGORY, NAME, DESC, URL, IMG_URL" \
+                sql_ins_prod = "INSERT INTO TORY_PROD(CATEGORY, CATEGORY_URL" \
+                      ", NAME, DESC, URL, IMG_URL" \
                       ", STANDARD_PRICE, SALES_PRICE, STATUS, CREATED, LAST_UPD)" \
-                      " VALUES (:CATEGORY, :NAME, :DESC, :URL, :IMG_URL" \
+                      " VALUES (:CATEGORY, :CATEGORY_URL, :NAME, :DESC, :URL, :IMG_URL" \
                       ", :STANDARD_PRICE, :SALES_PRICE, 'ACTIVE' " \
                       ", DATETIME('NOW', 'LOCALTIME'), DATETIME('NOW', 'LOCALTIME'));"
                 self.cursor.execute(sql_ins_prod, {"CATEGORY":str(item['category'].encode('utf-8'))
+                    , "CATEGORY_URL":str(item['category_url'].encode('utf-8'))
                     , "NAME":str(item['name'][0].encode('utf-8'))
                     , "DESC":str(item['desc'][0].encode('utf-8'))
                     , "URL":str(item['url'][0].encode('utf-8'))

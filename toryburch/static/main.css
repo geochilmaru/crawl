@@ -153,10 +153,12 @@ body {
   }
 }
 
+/*
 img.thumb_nail {
     width: 100px;
     height: auto;
 }
+*/
 
 /*
 * 말풍선
@@ -175,10 +177,42 @@ a.info:hover span{ /*the span will display just on :hover state*/
     display:block;
     position:absolute;
 	font-weight:bold;
-    top:40px;left:120px; width:300px;
+    top:40px;left:125px; width:444px;
     margin-left:-125px;
 	border:1px solid #0cf;
     background-color:#0099FF;
 	color:#ffffff;
-    text-align: center;
+    text-align: left;
 	z-index:9999999;}
+
+/*
+* 이미지
+*/
+.crop {
+float: left;
+overflow: hidden;
+}
+.crop img {
+margin:-50px 0px 0px 0px;
+    width: 100px;
+    height: auto;
+}
+
+/*  */
+a.tooltip{
+	font-size: 10px;
+	text-decoration:none;
+	color:#000
+}
+
+#tooltip{
+	position:absolute;
+	border:1px solid #333;
+	background:#f7f5d1;
+	padding:2px 5px;
+	color:#333;
+	display:none;
+	font-size: 14px;
+	}	
+
+/*  */

@@ -89,10 +89,11 @@ def home():
             errors.append("Please make sure it's valid and try again")
     else:
         order_by = 'DESC ASC'
+        curr_sort = ""
     sort_arrow[order_by] = 'red'
 
     db = get_db()
-    sql_prod = 'SELECT ROW_ID, CATEGORY, NAME, DESC, IMG_URL, URL' \
+    sql_prod = 'SELECT ROW_ID, CATEGORY, CATEGORY_URL, NAME, DESC, IMG_URL, URL' \
                ', STANDARD_PRICE, SALES_PRICE, LAST_UPD ' \
                'FROM TORY_PROD ' \
                'WHERE SALES_PRICE <> \'$0\' AND STATUS=\'ACTIVE\' ' \
@@ -108,19 +109,20 @@ def home():
     #     cur_price = db.execute(sql_price, {"PAR_ROW_ID": prod_id})
     #     prices = cur_price.fetchall()
     #     prod['PRICE'] = prices
-    return render_template('home.html', entries=prods, errors=errors, sort=sort_arrow)
-
-
-@app.route('/sort', methods=['POST'])
-def sort_query():
-    sort = [request.form['sort']]
-    # return sort[0]
-    return redirect(url_for('home', sort=sort[0]))
+    return render_template('home.html', entries=prods, errors=errors, sort=sort_arrow, curr_sort=order_by)
 
 
 @app.route('/about')
 def about():
 	return render_template('about.html')
+
+
+"""
+@app.route('/sort', methods=['POST'])
+def sort_query():
+    sort = [request.form['sort']]
+    # return sort[0]
+    return redirect(url_for('home', sort=sort[0]))
 
 
 @app.route('/add', methods=['POST'])
@@ -155,7 +157,7 @@ def logout():
     session.pop('logged_in', None)
     flash('You were logged out')
     return redirect(url_for('show_entries'))
-
+"""
 
 if __name__ == '__main__':
 #    app.run()
