@@ -39,6 +39,8 @@ class TorySpider(scrapy.Spider):
             desc = sel.xpath('div[@class="image"]/div[@class="thumbnail"]/div[@class="productimage with-alternate"]/a/img[@class="product-image-primary"]/@title').extract()
             url = sel.xpath('div[@class="image"]/div[@class="thumbnail"]/div[@class="productimage with-alternate"]/a/@href').extract()
             img_url = sel.xpath('div[@class="image"]/div[@class="thumbnail"]/div[@class="productimage with-alternate"]/a/img[@class="product-image-primary"]/@src').extract()
+            alt_img_url = sel.xpath('div[@class="image"]/div[@class="thumbnail"]/div[@class="productimage with-alternate"]/a/img[@class="alternateimage"]/@src').extract()
+            alt_img_desc = sel.xpath('div[@class="image"]/div[@class="thumbnail"]/div[@class="productimage with-alternate"]/a/img[@class="alternateimage"]/@alt').extract()
 
             if not standard_price:
                 standard_price = no_sales_price
@@ -53,6 +55,8 @@ class TorySpider(scrapy.Spider):
             item["desc"] = desc
             item["url"] = url
             item["img_url"] = img_url
+            item["alt_img_url"] = alt_img_url
+            item["alt_img_desc"] = alt_img_desc
             # yield item
             items.append(item)
         return items

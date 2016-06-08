@@ -15,6 +15,8 @@ class ToryburchItem(scrapy.Item):
     desc = scrapy.Field()
     url = scrapy.Field()
     img_url = scrapy.Field()
+    alt_img_url = scrapy.Field()
+    alt_img_desc = scrapy.Field()
     standard_price = scrapy.Field()
     sales_price = scrapy.Field()
     created = scrapy.Field()

@@ -82,10 +82,11 @@ class ToryburchPipeline(object):
         else:
             try:
                 sql_ins_prod = "INSERT INTO TORY_PROD(CATEGORY, CATEGORY_URL" \
-                      ", NAME, DESC, URL, IMG_URL" \
+                      ", NAME, DESC, URL, IMG_URL, ALT_IMG_URL, ALT_IMG_DESC" \
                       ", STANDARD_PRICE, SALES_PRICE, STATUS, CREATED, LAST_UPD)" \
-                      " VALUES (:CATEGORY, :CATEGORY_URL, :NAME, :DESC, :URL, :IMG_URL" \
-                      ", :STANDARD_PRICE, :SALES_PRICE, 'ACTIVE' " \
+                      " VALUES (:CATEGORY, :CATEGORY_URL, :NAME, :DESC, :URL" \
+                      ", :IMG_URL, :ALT_IMG_URL, :ALT_IMG_DESC, :STANDARD_PRICE" \
+                      ", :SALES_PRICE, 'ACTIVE' " \
                       ", DATETIME('NOW', 'LOCALTIME'), DATETIME('NOW', 'LOCALTIME'));"
                 self.cursor.execute(sql_ins_prod, {"CATEGORY":str(item['category'].encode('utf-8'))
                     , "CATEGORY_URL":str(item['category_url'].encode('utf-8'))
@@ -93,8 +94,10 @@ class ToryburchPipeline(object):
                     , "DESC":str(item['desc'][0].encode('utf-8'))
                     , "URL":str(item['url'][0].encode('utf-8'))
                     , "IMG_URL":str(item['img_url'][0].encode('utf-8'))
-                    , "STANDARD_PRICE":str(item['standard_price'][0].encode('utf-8'))
-                    , "SALES_PRICE":str(item['sales_price'][0].encode('utf-8'))
+                    , "ALT_IMG_URL":str(item['alt_img_url'][0].encode('utf-8'))
+                    , "ALT_IMG_DESC":str(item['alt_img_desc'][0].encode('utf-8'))
+                    , "STANDARD_PRICE":str(item['standard_price'][0].replace('$','').encode('utf-8'))
+                    , "SALES_PRICE":str(item['sales_price'][0].replace('$','').encode('utf-8'))
                                   })
                 prod_id = self.cursor.lastrowid
                 self.conn.commit()
@@ -103,8 +106,8 @@ class ToryburchPipeline(object):
                                 ", CREATED, LAST_UPD) VALUES (:PAR_ROW_ID, :STANDARD_PRICE, :SALES_PRICE" \
                                 ", DATETIME('NOW', 'LOCALTIME'), DATETIME('NOW', 'LOCALTIME'));"
                 self.cursor.execute(sql_ins_price, {"PAR_ROW_ID": prod_id
-                    , "STANDARD_PRICE": str(item['standard_price'][0].encode('utf-8'))
-                    , "SALES_PRICE": str(item['sales_price'][0].encode('utf-8'))})
+                    , "STANDARD_PRICE": str(item['standard_price'][0].replace('$','').encode('utf-8'))
+                    , "SALES_PRICE": str(item['sales_price'][0].replace('$','').encode('utf-8'))})
                 self.conn.commit()
             except sqlite3.Error, e:
                 print "Error %d: %s" % (e.args[0], e.args[1])

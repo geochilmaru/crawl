@@ -93,10 +93,13 @@ def home():
     sort_arrow[order_by] = 'red'
 
     db = get_db()
-    sql_prod = 'SELECT ROW_ID, CATEGORY, CATEGORY_URL, NAME, DESC, IMG_URL, URL' \
+    sql_prod = 'SELECT ROW_ID, CATEGORY, CATEGORY_URL, NAME, DESC, URL' \
+               ', IMG_URL, ALT_IMG_URL, ALT_IMG_DESC' \
                ', STANDARD_PRICE, SALES_PRICE, LAST_UPD ' \
+               ', STANDARD_PRICE - SALES_PRICE AS DISC_PRICE ' \
+               ', CAST(100-(SALES_PRICE/STANDARD_PRICE*100) AS INT) AS DISC_PERC ' \
                'FROM TORY_PROD ' \
-               'WHERE SALES_PRICE <> \'$0\' AND STATUS=\'ACTIVE\' ' \
+               'WHERE SALES_PRICE <> \'0\' AND STATUS=\'ACTIVE\' ' \
                'ORDER BY '+ order_by
                # 'ORDER BY :ORDER_BY;'.format(ORDER_BY="SALES_PRICE")
     cur_prod = db.execute(sql_prod)
