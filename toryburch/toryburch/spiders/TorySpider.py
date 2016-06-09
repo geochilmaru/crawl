@@ -60,3 +60,8 @@ class TorySpider(scrapy.Spider):
             # yield item
             items.append(item)
         return items
+
+
+    def parse_detail(self, response):
+        pass
+        # return details

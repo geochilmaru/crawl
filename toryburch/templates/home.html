@@ -26,8 +26,8 @@
 {%	for entry in entries %}
 <tr class="row">
 	<td width=* class="cell">
-		<div class="crop"><a href="{{ entry.ALT_IMG_URL }}" class="preview" title="{{ entry.NAME }}"><img align="left" src={{ entry.IMG_URL }}></a></div>
-		<a class="info" target="_blank" href="{{ entry.URL }}">{{ entry.DESC|safe }}<span>{{ entry.NAME }}</span></a>
+		<div class="crop"><a href="{{ entry.ALT_IMG_URL }}" class="preview" title="{{ entry.DESC|safe }}"><img align="left" src={{ entry.IMG_URL }}></a></div>
+		<a class="info" target="_blank" href="{{ entry.URL }}">{{ entry.NAME }}<span>{{ entry.DESC|safe }}</span></a>
 		<br><a href="{{ entry.CATEGORY_URL }}" class="tooltip" title="Go to the site" target="_blank">{{ entry.CATEGORY }}</a>
 	<td width=100 class="cell">{{ entry.STANDARD_PRICE }}</td>
 	<td width=100 class="cell">{{ entry.SALES_PRICE }}</td>
