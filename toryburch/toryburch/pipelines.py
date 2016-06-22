@@ -44,6 +44,21 @@ class ToryburchPipeline(object):
                 self.cursor.execute(sql_upd_prod, {"ROW_ID": prod_id})
                 self.conn.commit()
 
+                sql_del_color = "DELETE FROM TORY_COLOR " \
+                                "WHERE PAR_ROW_ID = :PROD_ID;"
+                sql_ins_color = "INSERT INTO TORY_COLOR" \
+                                "(PAR_ROW_ID, NAME, IMG_URL" \
+                                ", CREATED, LAST_UPD)" \
+                                " VALUES" \
+                                " ('"+ str(prod_id).encode('utf-8') +"'" \
+                                ", :color, :img_url " \
+                                ", DATETIME('NOW', 'LOCALTIME') " \
+                                ", DATETIME('NOW', 'LOCALTIME'))"
+                self.cursor.execute(sql_del_color, {"PROD_ID": prod_id})
+                # print item['color']
+                # test = [{'color': 'FRENCH', 'img_url': 'FRENCH'}, {'color': 'GRAY', 'img_url': 'GRAY'}]
+                self.cursor.executemany(sql_ins_color, item['color'])
+
                 sql_sel_price = "SELECT ROW_ID FROM TORY_PRICE" \
                                 " WHERE PAR_ROW_ID = :PROD_ID" \
                                 " AND STANDARD_PRICE = :STANDARD_PRICE" \
@@ -112,3 +127,4 @@ class ToryburchPipeline(object):
             except sqlite3.Error, e:
                 print "Error %d: %s" % (e.args[0], e.args[1])
                 return item
+        # self.conn.close()
