@@ -94,8 +94,10 @@ class TorySpider(scrapy.Spider):
             col_attr = {}
             col = sel.xpath('a/span/text()').extract()
             img_url = sel.xpath('a/img[@class="swatchimage"]/@src').extract()
+            col_code = sel.xpath('div/text()').extract()
             col_attr["color"] = col[0]
-            col_attr["img_url"] = col[0]
+            col_attr["img_url"] = img_url[0]
+            col_attr["col_code"] = col_code[0]
             color.append(col_attr)
         item["color"] = color
         # print item["color"]

@@ -47,11 +47,11 @@ class ToryburchPipeline(object):
                 sql_del_color = "DELETE FROM TORY_COLOR " \
                                 "WHERE PAR_ROW_ID = :PROD_ID;"
                 sql_ins_color = "INSERT INTO TORY_COLOR" \
-                                "(PAR_ROW_ID, NAME, IMG_URL" \
+                                "(PAR_ROW_ID, NAME, IMG_URL, CODE" \
                                 ", CREATED, LAST_UPD)" \
                                 " VALUES" \
                                 " ('"+ str(prod_id).encode('utf-8') +"'" \
-                                ", :color, :img_url " \
+                                ", :color, :img_url, :col_code " \
                                 ", DATETIME('NOW', 'LOCALTIME') " \
                                 ", DATETIME('NOW', 'LOCALTIME'))"
                 self.cursor.execute(sql_del_color, {"PROD_ID": prod_id})

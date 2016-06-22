@@ -106,6 +106,14 @@ def home():
     prods = cur_prod.fetchall()
     # for prod in prods:
     #     prod_id = prod["ROW_ID"]
+    #     sql_price = 'SELECT NAME, IMG_URL' \
+    #                 'FROM TORY_PRICE ' \
+    #                 'WHERE PAR_ROW_ID = :PAR_ROW_ID;'
+    #     cur_price = db.execute(sql_price, {"PAR_ROW_ID": prod_id})
+    #     prices = cur_price.fetchall()
+    #     prod['PRICE'] = prices
+    # for prod in prods:
+    #     prod_id = prod["ROW_ID"]
     #     sql_price = 'SELECT STANDARD_PRICE, SALES_PRICE, CREATED, LAST_UPD ' \
     #                 'FROM TORY_PRICE ' \
     #                 'WHERE PAR_ROW_ID = :PAR_ROW_ID;'
