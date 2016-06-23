@@ -82,13 +82,13 @@ def home():
                   'SALES_PRICE ASC':'white', 'SALES_PRICE DESC':'white',
                   'LAST_UPD ASC':'white', 'LAST_UPD DESC':'white'}
     if request.method == 'POST':
-        order_by = 'DESC ASC'
+        order_by = 'NAME ASC'
         try:
             order_by = request.form['sort']
         except:
             errors.append("Please make sure it's valid and try again")
     else:
-        order_by = 'DESC ASC'
+        order_by = 'NAME ASC'
         curr_sort = ""
     sort_arrow[order_by] = 'red'
 
