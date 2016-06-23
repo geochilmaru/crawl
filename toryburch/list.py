@@ -97,7 +97,7 @@ def home():
                ', IMG_URL, ALT_IMG_URL, ALT_IMG_DESC, DETAILS ' \
                ', STANDARD_PRICE, SALES_PRICE, LAST_UPD ' \
                ', STANDARD_PRICE - SALES_PRICE AS DISC_PRICE ' \
-               ', CAST(100-(SALES_PRICE/STANDARD_PRICE*100) AS INT) AS DISC_PERC ' \
+               ', CAST(((STANDARD_PRICE-SALES_PRICE)/STANDARD_PRICE)*100 AS INT) AS DISC_PERC ' \
                'FROM TORY_PROD ' \
                'WHERE SALES_PRICE <> \'0\' AND STATUS=\'ACTIVE\' ' \
                'ORDER BY '+ order_by

@@ -112,9 +112,9 @@ class TorySpider(scrapy.Spider):
             lists = sel.xpath('li/text()').extract()
             # dtls = str(dtl.encode('utf-8'))
             dtl = [x.encode('utf-8') for x in lists]
-            dtls = "".join(dtl)
+            dtls = "<br>".join(dtl)
             detail.append(dtls)
-        details = "".join(detail)
+        details = "<br>".join(detail)
         item["details"] = details
         # print details
         # item["color"] = color
