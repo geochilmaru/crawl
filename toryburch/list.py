@@ -93,8 +93,8 @@ def home():
     sort_arrow[order_by] = 'red'
 
     db = get_db()
-    sql_prod = 'SELECT ROW_ID, CATEGORY, CATEGORY_URL, NAME, DESC, URL' \
-               ', IMG_URL, ALT_IMG_URL, ALT_IMG_DESC' \
+    sql_prod = 'SELECT ROW_ID, CATEGORY, CATEGORY_URL, NAME, FULL_NAME, DESC, URL' \
+               ', IMG_URL, ALT_IMG_URL, ALT_IMG_DESC, DETAILS ' \
                ', STANDARD_PRICE, SALES_PRICE, LAST_UPD ' \
                ', STANDARD_PRICE - SALES_PRICE AS DISC_PRICE ' \
                ', CAST(100-(SALES_PRICE/STANDARD_PRICE*100) AS INT) AS DISC_PERC ' \
@@ -104,14 +104,15 @@ def home():
                # 'ORDER BY :ORDER_BY;'.format(ORDER_BY="SALES_PRICE")
     cur_prod = db.execute(sql_prod)
     prods = cur_prod.fetchall()
-    # for prod in prods:
-    #     prod_id = prod["ROW_ID"]
-    #     sql_price = 'SELECT NAME, IMG_URL' \
-    #                 'FROM TORY_PRICE ' \
-    #                 'WHERE PAR_ROW_ID = :PAR_ROW_ID;'
-    #     cur_price = db.execute(sql_price, {"PAR_ROW_ID": prod_id})
-    #     prices = cur_price.fetchall()
-    #     prod['PRICE'] = prices
+    for prod in prods:
+        color = {}
+        prod_id = prod["ROW_ID"]
+        sql_color = 'SELECT NAME, URL, IMG_URL, CODE ' \
+                    'FROM TORY_COLOR ' \
+                    'WHERE PAR_ROW_ID = :PAR_ROW_ID;'
+        cur_color = db.execute(sql_color, {"PAR_ROW_ID": prod_id})
+        color = cur_color.fetchall()
+        prod['COLOR'] = color
     # for prod in prods:
     #     prod_id = prod["ROW_ID"]
     #     sql_price = 'SELECT STANDARD_PRICE, SALES_PRICE, CREATED, LAST_UPD ' \

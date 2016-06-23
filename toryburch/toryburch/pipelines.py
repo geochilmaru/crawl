@@ -47,16 +47,14 @@ class ToryburchPipeline(object):
                 sql_del_color = "DELETE FROM TORY_COLOR " \
                                 "WHERE PAR_ROW_ID = :PROD_ID;"
                 sql_ins_color = "INSERT INTO TORY_COLOR" \
-                                "(PAR_ROW_ID, NAME, IMG_URL, CODE" \
+                                "(PAR_ROW_ID, NAME, URL, IMG_URL, CODE" \
                                 ", CREATED, LAST_UPD)" \
                                 " VALUES" \
-                                " ('"+ str(prod_id).encode('utf-8') +"'" \
-                                ", :color, :img_url, :col_code " \
+                                " ('" + str(prod_id).encode('utf-8') + "'" \
+                                ", :color, :url, :img_url, :col_code " \
                                 ", DATETIME('NOW', 'LOCALTIME') " \
                                 ", DATETIME('NOW', 'LOCALTIME'))"
                 self.cursor.execute(sql_del_color, {"PROD_ID": prod_id})
-                # print item['color']
-                # test = [{'color': 'FRENCH', 'img_url': 'FRENCH'}, {'color': 'GRAY', 'img_url': 'GRAY'}]
                 self.cursor.executemany(sql_ins_color, item['color'])
 
                 sql_sel_price = "SELECT ROW_ID FROM TORY_PRICE" \
@@ -97,25 +95,37 @@ class ToryburchPipeline(object):
         else:
             try:
                 sql_ins_prod = "INSERT INTO TORY_PROD(CATEGORY, CATEGORY_URL" \
-                      ", NAME, DESC, URL, IMG_URL, ALT_IMG_URL, ALT_IMG_DESC" \
+                      ", NAME, FULL_NAME, DESC, URL, IMG_URL" \
+                      ", ALT_IMG_URL, ALT_IMG_DESC, DETAILS" \
                       ", STANDARD_PRICE, SALES_PRICE, STATUS, CREATED, LAST_UPD)" \
-                      " VALUES (:CATEGORY, :CATEGORY_URL, :NAME, :DESC, :URL" \
-                      ", :IMG_URL, :ALT_IMG_URL, :ALT_IMG_DESC, :STANDARD_PRICE" \
-                      ", :SALES_PRICE, 'ACTIVE' " \
+                      " VALUES (:CATEGORY, :CATEGORY_URL, :NAME, :FULL_NAME, :DESC, :URL" \
+                      ", :IMG_URL, :ALT_IMG_URL, :ALT_IMG_DESC, :DETAILS" \
+                      ", :STANDARD_PRICE, :SALES_PRICE, 'ACTIVE' " \
                       ", DATETIME('NOW', 'LOCALTIME'), DATETIME('NOW', 'LOCALTIME'));"
                 self.cursor.execute(sql_ins_prod, {"CATEGORY":str(item['category'].encode('utf-8'))
                     , "CATEGORY_URL":str(item['category_url'].encode('utf-8'))
-                    , "NAME":str(item['name'][0].encode('utf-8'))
-                    , "DESC":str(item['desc'][0].encode('utf-8'))
+                    , "NAME":str(item['name'][0].encode('utf-8')).strip()
+                    , "FULL_NAME":str(item['full_name'][0].encode('utf-8')).strip()
+                    , "DESC":str(item['desc'][0].encode('utf-8')).strip()
                     , "URL":str(item['url'][0].encode('utf-8'))
                     , "IMG_URL":str(item['img_url'][0].encode('utf-8'))
                     , "ALT_IMG_URL":str(item['alt_img_url'][0].encode('utf-8'))
                     , "ALT_IMG_DESC":str(item['alt_img_desc'][0].encode('utf-8'))
+                    , "DETAILS":item['details'].strip()
                     , "STANDARD_PRICE":str(item['standard_price'][0].replace('$','').encode('utf-8'))
                     , "SALES_PRICE":str(item['sales_price'][0].replace('$','').encode('utf-8'))
                                   })
                 prod_id = self.cursor.lastrowid
-                self.conn.commit()
+
+                sql_ins_color = "INSERT INTO TORY_COLOR" \
+                                "(PAR_ROW_ID, NAME, URL, IMG_URL, CODE" \
+                                ", CREATED, LAST_UPD)" \
+                                " VALUES" \
+                                " ('" + str(prod_id).encode('utf-8') + "'" \
+                                ", :color, :url, :img_url, :col_code " \
+                                ", DATETIME('NOW', 'LOCALTIME') " \
+                                ", DATETIME('NOW', 'LOCALTIME'))"
+                self.cursor.executemany(sql_ins_color, item['color'])
 
                 sql_ins_price = "INSERT INTO TORY_PRICE(PAR_ROW_ID, STANDARD_PRICE, SALES_PRICE" \
                                 ", CREATED, LAST_UPD) VALUES (:PAR_ROW_ID, :STANDARD_PRICE, :SALES_PRICE" \

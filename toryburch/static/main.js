@@ -34,8 +34,9 @@ this.tooltip = function(){
 		$("#tooltip")
 			.css("top",(e.pageY - xOffset) + "px")
 			.css("left",(e.pageX + yOffset) + "px");
-	});			
+	});		
 };
+
 
 
 this.imagePreview = function(){	

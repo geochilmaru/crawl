@@ -12,6 +12,7 @@ class ToryburchItem(scrapy.Item):
     category = scrapy.Field()
     category_url = scrapy.Field()
     name = scrapy.Field()
+    full_name = scrapy.Field()
     desc = scrapy.Field()
     url = scrapy.Field()
     img_url = scrapy.Field()

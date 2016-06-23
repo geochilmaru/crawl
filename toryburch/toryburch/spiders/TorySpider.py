@@ -47,7 +47,8 @@ class TorySpider(scrapy.Spider):
         # p = re.compile(r"^[+-]?\d*(\.?\d*)$")
         for sel in selects:
             item = ToryburchItem()
-            name = sel.xpath('div[@class="name"]/a/@title').extract()
+            name = sel.xpath('div[@class="name"]/a/text()').extract()
+            full_name = sel.xpath('div[@class="name"]/a/@title').extract()
             standard_price = sel.xpath('div[@class="pricing"]/div[@class="price"]/div[@class="discountprice"]/div[@class="standardprice"]/text()').extract()
             sales_price = sel.xpath('div[@class="pricing"]/div[@class="price"]/div[@class="discountprice"]/div[@class="salesprice"]/text()').extract()
             no_sales_price = sel.xpath('div[@class="pricing"]/div[@class="price"]/div[@class="salesprice"]/text()').extract()
@@ -65,6 +66,7 @@ class TorySpider(scrapy.Spider):
             item["category"] = category
             item["category_url"] = category_url
             item["name"] = name
+            item["full_name"] = full_name
             item["standard_price"] = standard_price
             item["sales_price"] = sales_price
             item["desc"] = desc
@@ -93,23 +95,30 @@ class TorySpider(scrapy.Spider):
         for sel in selects:
             col_attr = {}
             col = sel.xpath('a/span/text()').extract()
+            url = sel.xpath('a/@name').extract()
             img_url = sel.xpath('a/img[@class="swatchimage"]/@src').extract()
             col_code = sel.xpath('div/text()').extract()
-            col_attr["color"] = col[0]
+            col_attr["color"] = col[0].upper()
+            col_attr["url"] = url[0]
             col_attr["img_url"] = img_url[0]
             col_attr["col_code"] = col_code[0]
             color.append(col_attr)
         item["color"] = color
-        # print item["color"]
-        yield item
-        # print item["name"], item["color"]
-        # selects = []
-        # selects = hxs.xpath('//div[@class="detailsPanel"]')
-        # for sel in selects:
-        #     desc = sel.xpath('div/ul/li/text()').extract()
-        # spec = "<br>".join(desc)
-        # item["spec"] = spec
+
+        del selects[:]
+        selects = hxs.xpath('//div[@class="detailsPanel"]/div/ul')
+        detail = []
+        for sel in selects:
+            lists = sel.xpath('li/text()').extract()
+            # dtls = str(dtl.encode('utf-8'))
+            dtl = [x.encode('utf-8') for x in lists]
+            dtls = "".join(dtl)
+            detail.append(dtls)
+        details = "".join(detail)
+        item["details"] = details
+        # print details
         # item["color"] = color
+        yield item
 
 
         # detail = ['28846',]
