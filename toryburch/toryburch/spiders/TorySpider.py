@@ -15,7 +15,9 @@ class TorySpider(scrapy.Spider):
     name = "toryburch"
     allowed_domains = ["toryburch.com"]
     start_urls = [
-        "https://www.toryburch.com/handbags/clutches-evening-bags/",
+        "https://www.toryburch.com/"
+        # "https://www.toryburch.com/handbags-newarrivals/",
+        # "https://www.toryburch.com/handbags/clutches-evening-bags/",
         # "https://www.toryburch.com/handbags/clutches-evening-bags/?icampid=hb_p3",
         # "https://www.toryburch.com/robinson-convertible-shoulder-bag/28846.html?cgid=handbags-clutches&dwvar_28846_color=001&start=1",
         ]
@@ -32,16 +34,30 @@ class TorySpider(scrapy.Spider):
 
     def parse(self, response):
         hxs = Selector(response)
+        categories = ['New Arrivals', 'Baby Bags', 'Backpacks'
+            , 'Clutches & Evening Bags', 'Cross-Body Bags'
+            , 'Mini Bags', 'Satchels & Shoulder Bags', 'Totes']
         selects = []
-        selects = hxs.xpath('//ol[@typeof="BreadcrumbList"]')
-        cate = []
-        cate_url = ""
-        for index in range(len(selects)):
-            cate = selects[index].xpath('li[@property="itemListElement"]/a/span/text()').extract()
-            cate_url = selects[index].xpath('li[@property="itemListElement"]/a/@href').extract()
-        category = "> ".join(cate)
-        category_url = cate_url.pop()
+        selects = hxs.xpath('//li[@class="handbags"]/ul/li/ul/li')
+        for sel in selects:
+            cate_name = sel.xpath('a/@title').extract()
+            if categories.count(cate_name[0]) > 0:
+                cate_url = sel.xpath('a/@href').extract()
+                yield Request(cate_url[0], callback=self.parse_list)
+
+
+    def parse_list(self, response):
+        hxs = Selector(response)
         selects = []
+        selects = hxs.xpath('//ol[@typeof="BreadcrumbList"]/li/a/span/text()').extract()
+        cate = [sel.encode('utf-8') for sel in selects]
+        category = selects.pop()
+
+        del selects[:]
+        selects = hxs.xpath('//ol[@typeof="BreadcrumbList"]/li/a/@href').extract()
+        category_url = selects.pop()
+
+        del selects[:]
         selects = hxs.xpath('//div[@class="producttile-inner"]')
         items = []
         # p = re.compile(r"^[+-]?\d*(\.?\d*)$")
@@ -75,15 +91,8 @@ class TorySpider(scrapy.Spider):
             item["alt_img_url"] = alt_img_url
             item["alt_img_desc"] = alt_img_desc
             yield Request(url[0], callback=self.parse_detail, meta={"item":item})
-            # print "hello", item["style_num"]
-            # print "world", item["style_num"]
-            # items.append(item)
-        # return items
-            # print self.parse_detail(response)
-        #
-        #     # cleaned_url = "%s/?1" % url if not '/' in url.partition('//')[2] else "%s?1" % url
-        #     # yield Request(cleaned_url, callback = self.parse_page, meta=meta,)
-        #     yield item
+        #     # items.append(item)
+        # # return items
 
 
     def parse_detail(self, response):
@@ -116,15 +125,4 @@ class TorySpider(scrapy.Spider):
             detail.append(dtls)
         details = "<br>".join(detail)
         item["details"] = details
-        # print details
-        # item["color"] = color
         yield item
-
-
-        # detail = ['28846',]
-        # item = []
-        # item["hello"] = 'world'
-        # return item
-        # print item["name"], item["color"]
-        # print "!!!!!"
-        # yield "!!!!!"

@@ -29,9 +29,11 @@ class ToryburchPipeline(object):
 
     def process_item(self, item, spider):
         sql_sel_prod = "SELECT ROW_ID FROM TORY_PROD" \
-                       " WHERE TRIM(NAME) = :NANE" \
-                       " OR TRIM(DESC) = :DESC;"
-        self.cursor.execute(sql_sel_prod, {"NANE": str(item['name'][0].encode('utf-8')).strip(),
+                       " WHERE CATEGORY = :CATEGORY" \
+                       " AND (TRIM(NAME) = :NANE" \
+                       " OR TRIM(DESC) = :DESC);"
+        self.cursor.execute(sql_sel_prod, {"CATEGORY": str(item['category'][0].encode('utf-8')).strip(),
+                                           "NANE": str(item['name'][0].encode('utf-8')).strip(),
                                            "DESC": str(item['desc'][0].encode('utf-8')).strip()})
         result_prod = self.cursor.fetchone()
 

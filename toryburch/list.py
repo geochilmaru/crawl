@@ -77,32 +77,63 @@ def close_db(error):
 @app.route('/', methods=['GET', 'POST'])
 def home():
     errors = []
+    cate_selected = {'View All': ''
+        , 'New Arrivals': ''
+        , 'Baby Bags': '', 'Backpacks': ''
+        , 'Clutches & Evening Bags': ''
+        , 'Cross-Body Bags': ''
+        , 'Mini Bags': ''
+        , 'Satchels & Shoulder Bags': ''
+        , 'Totes': ''}
     sort_arrow = {'DESC ASC':'white', 'DESC DESC':'white',
                   'STANDARD_PRICE ASC':'white', 'STANDARD_PRICE DESC':'white',
                   'SALES_PRICE ASC':'white', 'SALES_PRICE DESC':'white',
                   'LAST_UPD ASC':'white', 'LAST_UPD DESC':'white'}
     if request.method == 'POST':
         order_by = 'NAME ASC'
+        category = "View All"
         try:
+            category = request.form['category']
             order_by = request.form['sort']
         except:
             errors.append("Please make sure it's valid and try again")
     else:
+        category = "View All"
         order_by = 'NAME ASC'
-        curr_sort = ""
+        # curr_sort = ""
+    cate_selected[category] = "selected"
     sort_arrow[order_by] = 'red'
 
     db = get_db()
-    sql_prod = 'SELECT ROW_ID, CATEGORY, CATEGORY_URL, NAME, FULL_NAME, DESC, URL' \
-               ', IMG_URL, ALT_IMG_URL, ALT_IMG_DESC, DETAILS ' \
-               ', STANDARD_PRICE, SALES_PRICE, LAST_UPD ' \
-               ', STANDARD_PRICE - SALES_PRICE AS DISC_PRICE ' \
-               ', CAST(((STANDARD_PRICE-SALES_PRICE)/STANDARD_PRICE)*100 AS INT) AS DISC_PERC ' \
-               'FROM TORY_PROD ' \
-               'WHERE SALES_PRICE <> \'0\' AND STATUS=\'ACTIVE\' ' \
-               'ORDER BY '+ order_by
-               # 'ORDER BY :ORDER_BY;'.format(ORDER_BY="SALES_PRICE")
-    cur_prod = db.execute(sql_prod)
+    # cur_prod = ""
+    if category == "View All":
+        sql_prod = 'SELECT Z.* ' \
+                   'FROM (SELECT ROW_ID, CATEGORY, CATEGORY_URL, NAME, FULL_NAME, DESC, URL' \
+                   '        , IMG_URL, ALT_IMG_URL, ALT_IMG_DESC, DETAILS ' \
+                   '        , STANDARD_PRICE, SALES_PRICE, LAST_UPD ' \
+                   '        , STANDARD_PRICE - SALES_PRICE AS DISC_PRICE ' \
+                   '        , CAST(((STANDARD_PRICE-SALES_PRICE)/STANDARD_PRICE)*100 AS INT) AS DISC_RATE ' \
+                   '    FROM TORY_PROD ' \
+                   '    WHERE SALES_PRICE <> \'0\' AND STATUS=\'ACTIVE\' ' \
+                   '    ) Z ' \
+                   'ORDER BY Z.'+ order_by
+                   # 'ORDER BY :ORDER_BY;'.format(ORDER_BY="SALES_PRICE")
+        cur_prod = db.execute(sql_prod)
+    else:
+        sql_prod = 'SELECT Z.* ' \
+                   'FROM (SELECT ROW_ID, CATEGORY, CATEGORY_URL, NAME, FULL_NAME, DESC, URL' \
+                   '        , IMG_URL, ALT_IMG_URL, ALT_IMG_DESC, DETAILS ' \
+                   '        , STANDARD_PRICE, SALES_PRICE, LAST_UPD ' \
+                   '        , STANDARD_PRICE - SALES_PRICE AS DISC_PRICE ' \
+                   '        , CAST(((STANDARD_PRICE-SALES_PRICE)/STANDARD_PRICE)*100 AS INT) AS DISC_RATE ' \
+                   '    FROM TORY_PROD ' \
+                   '    WHERE SALES_PRICE <> \'0\' AND STATUS=\'ACTIVE\' ' \
+                   '        AND CATEGORY = :CATEGORY ' \
+                   '    ) Z ' \
+                   'ORDER BY Z.'+ order_by
+                   # 'ORDER BY :ORDER_BY;'.format(ORDER_BY="SALES_PRICE")
+        cur_prod = db.execute(sql_prod, {"CATEGORY": category})
+
     prods = cur_prod.fetchall()
     for prod in prods:
         color = {}
@@ -121,7 +152,7 @@ def home():
     #     cur_price = db.execute(sql_price, {"PAR_ROW_ID": prod_id})
     #     prices = cur_price.fetchall()
     #     prod['PRICE'] = prices
-    return render_template('home.html', entries=prods, errors=errors, sort=sort_arrow, curr_sort=order_by)
+    return render_template('home.html', entries=prods, errors=errors, sort=sort_arrow, cate_selected=cate_selected)
 
 
 @app.route('/about')

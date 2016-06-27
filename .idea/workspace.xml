@@ -2,8 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c25e3b3-38b0-4a9a-a613-6efd36f84535" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/db/sqlite3.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/db/toryburch" />
+      <change type="NEW" beforePath="" afterPath="$APPLICATION_CONFIG_DIR$/colors/Darcula copy.icls" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/crawl.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/.idea/toryburch.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/db/schema.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/flaskr.py_" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/schema.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/scrapy.cfg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/scrapy_toryburch.bat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/static/main.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/templates/about.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/templates/layout.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/templates/www.toryburch.com__handbags__clutches-evening-bags.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/toryburch/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/toryburch/items.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/toryburch/pipelines.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/toryburch/settings.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/toryburch/spiders/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toryburch/toryburch/templates/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toryburch/db/toryburch.db" afterPath="$PROJECT_DIR$/toryburch/db/toryburch.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toryburch/list.py" afterPath="$PROJECT_DIR$/toryburch/list.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toryburch/templates/home.html" afterPath="$PROJECT_DIR$/toryburch/templates/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toryburch/toryburch/pipelines.py" afterPath="$PROJECT_DIR$/toryburch/toryburch/pipelines.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toryburch/toryburch/spiders/TorySpider.py" afterPath="$PROJECT_DIR$/toryburch/toryburch/spiders/TorySpider.py" />
     </list>
     <ignored path="crawl.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,8 +62,8 @@
       <file leaf-file-name="list.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/toryburch/list.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="91" column="22" selection-start-line="91" selection-start-column="22" selection-end-line="91" selection-end-column="22" />
+            <state relative-caret-position="522">
+              <caret line="95" column="47" selection-start-line="95" selection-start-column="47" selection-end-line="95" selection-end-column="47" />
               <folding>
                 <element signature="e#238#247#0" expanded="true" />
               </folding>
@@ -39,8 +74,8 @@
       <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toryburch/toryburch/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2014">
-              <caret line="106" column="73" selection-start-line="106" selection-start-column="73" selection-end-line="106" selection-end-column="73" />
+            <state relative-caret-position="418">
+              <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -49,8 +84,8 @@
       <file leaf-file-name="TorySpider.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toryburch/toryburch/spiders/TorySpider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+            <state relative-caret-position="176">
+              <caret line="38" column="62" selection-start-line="36" selection-start-column="22" selection-end-line="38" selection-end-column="62" />
               <folding>
                 <element signature="e#25#38#0" expanded="true" />
               </folding>
@@ -61,7 +96,7 @@
       <file leaf-file-name="scrapy.cfg" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toryburch/scrapy.cfg">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
+            <state relative-caret-position="242">
               <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
@@ -71,7 +106,7 @@
       <file leaf-file-name="items.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toryburch/toryburch/items.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
+            <state relative-caret-position="462">
               <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
               <folding />
             </state>
@@ -125,6 +160,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -190,12 +226,11 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Python" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="settings.editor.splitter.proportion" value="0.23506366" />
   </component>
   <component name="RunManager">
@@ -389,6 +424,14 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/toryburch/toryburch/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/toryburch/list.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1848">
@@ -766,7 +809,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/toryburch/toryburch/items.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
+        <state relative-caret-position="462">
           <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
           <folding />
         </state>
@@ -774,7 +817,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/toryburch/scrapy.cfg">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
+        <state relative-caret-position="242">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
@@ -782,16 +825,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/toryburch/toryburch/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2014">
-          <caret line="106" column="73" selection-start-line="106" selection-start-column="73" selection-end-line="106" selection-end-column="73" />
+        <state relative-caret-position="418">
+          <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/toryburch/toryburch/spiders/TorySpider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+        <state relative-caret-position="176">
+          <caret line="38" column="62" selection-start-line="36" selection-start-column="22" selection-end-line="38" selection-end-column="62" />
           <folding>
             <element signature="e#25#38#0" expanded="true" />
           </folding>
@@ -800,8 +843,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/toryburch/list.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="91" column="22" selection-start-line="91" selection-start-column="22" selection-end-line="91" selection-end-column="22" />
+        <state relative-caret-position="522">
+          <caret line="95" column="47" selection-start-line="95" selection-start-column="47" selection-end-line="95" selection-end-column="47" />
           <folding>
             <element signature="e#238#247#0" expanded="true" />
           </folding>

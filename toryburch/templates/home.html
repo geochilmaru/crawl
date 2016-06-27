@@ -9,18 +9,31 @@
 <table class="table">
 <form action="{{ url_for('home') }}" method=post class=add-entry>
 <tr>
-	<td colspan="4"><h1>Tory Burch</h1></td>
+	<td class="cell" colspan="5">
+		<select name="category" onchange="this.form.submit()">
+			<option value='View All' {{ cate_selected['View All'] }}>View All</option>
+			<option value='New Arrivals' {{ cate_selected['New Arrivals'] }}>New Arrivals</option>
+			<option value='Baby Bags' {{ cate_selected['Baby Bags'] }}>Baby Bags</option>
+			<option value='Backpacks' {{ cate_selected['Backpacks'] }}>Backpacks</option>
+			<option value='Clutches & Evening Bags' {{ cate_selected['Clutches & Evening Bags'] }}>Clutches & Evening Bags</option>
+			<option value='Cross-Body Bags' {{ cate_selected['Cross-Body Bags'] }}>Cross-Body Bags</option>
+			<option value='Mini Bags' {{ cate_selected['Mini Bags'] }}>Mini Bags</option>
+			<option value='Satchels & Shoulder Bags' {{ cate_selected['Satchels & Shoulder Bags'] }}>Satchels & Shoulder Bags</option>
+			<option value='Totes' {{ cate_selected['Totes'] }}>Totes</option>
+		</select>
+	</td>
 </tr>
 <tr class="row header blue">
-	<td width=* class="cell">Name<button type="button " name="sort" value="NAME ASC" style="background-color:{{sort['NAME ASC']}};border:0px">^</button><button type="button " name="sort" value="NAME DESC" style="background-color:{{sort['NAME DESC']}};border:0px">v</button></td>
-	<td width=100 class="cell">Standard Price<button type="button " name="sort" value="STANDARD_PRICE ASC" style="background-color:{{sort['STANDARD_PRICE ASC']}};border:0px">^</button><button type="button " name="sort" value="STANDARD_PRICE DESC" style="background-color:{{sort['STANDARD_PRICE DESC']}};border:0px">v</button></td>
-	<td width=100 class="cell">Sales Price<button type="button " name="sort" value="SALES_PRICE ASC" style="background-color:{{sort['SALES_PRICE ASC']}};border:0px">^</button><button type="button " name="sort" value="SALES_PRICE DESC" style="background-color:{{sort['SALES_PRICE DESC']}};border:0px">v</button></td>
-	<td width=100 class="cell">Last Updated<button type="button " name="sort" value="LAST_UPD ASC" style="background-color:{{sort['LAST_UPD ASC']}};border:0px">^</button><button type="button " name="sort" value="LAST_UPD DESC" style="background-color:{{sort['LAST_UPD DESC']}};border:0px">v</button></td>
+	<td width=* class="cell">Name<BR><button type="submit" name="sort" value="NAME ASC" style="background-color:{{sort['NAME ASC']}};border:0px">^</button><button type="button " name="sort" value="NAME DESC" style="background-color:{{sort['NAME DESC']}};border:0px">v</button></td>
+	<td width=70 class="cell">Standard<BR>Price<BR><button type="submit" name="sort" value="STANDARD_PRICE ASC, NAME ASC" style="background-color:{{sort['STANDARD_PRICE ASC, NAME ASC']}};border:0px">^</button><button type="submit" name="sort" value="STANDARD_PRICE DESC, NAME DESC" style="background-color:{{sort['STANDARD_PRICE DESC, NAME DESC']}};border:0px">v</button></td>
+	<td width=70 class="cell">Sales<BR>Price<BR><button type="submit" name="sort" value="SALES_PRICE ASC, NAME ASC" style="background-color:{{sort['SALES_PRICE ASC, NAME ASC']}};border:0px">^</button><button type="submit" name="sort" value="SALES_PRICE DESC, NAME DESC" style="background-color:{{sort['SALES_PRICE DESC, NAME DESC']}};border:0px">v</button></td>
+	<td width=70 class="cell">Discount<BR>Rate<BR><button type="submit" name="sort" value="DISC_RATE ASC, NAME ASC" style="background-color:{{sort['DISC_RATE ASC, NAME ASC']}};border:0px">^</button><button type="submit" name="sort" value="DISC_RATE DESC, NAME DESC" style="background-color:{{sort['DISC_RATE DESC, NAME DESC']}};border:0px">v</button></td>
+	<td width=80 class="cell">Last<BR>Updated<BR><button type="submit" name="sort" value="LAST_UPD ASC" style="background-color:{{sort['LAST_UPD ASC']}};border:0px">^</button><button type="submit" name="sort" value="LAST_UPD DESC" style="background-color:{{sort['LAST_UPD DESC']}};border:0px">v</button></td>
 </tr>
 </form>
 {% for error in errors %}
 <tr class="row">
-	<td colspan="4" class="cell">{{ error }}</td>
+	<td colspan="6" class="cell">{{ error }}</td>
 </tr>
 {% endfor %}
 {%	for entry in entries %}
@@ -49,9 +62,10 @@
 			</td>
 		</tr>
 		</table>
-	<td width=100 class="cell">{{ entry.STANDARD_PRICE }}</td>
-	<td width=100 class="cell">{{ entry.SALES_PRICE }}&nbsp;<font color=red>({{ entry.DISC_PERC }}%)</font></td>
-	<td width=100 class="cell">{{ entry.LAST_UPD }}</td>
+	<td width=70 class="cell">${{ entry.STANDARD_PRICE }}</td>
+	<td width=70 class="cell">${{ entry.SALES_PRICE }}</td>
+	<td width=70 class="cell"><font color=red>({{ entry.DISC_RATE }}%)</font></td>
+	<td width=80 class="cell">{{ entry.LAST_UPD }}</td>
 </tr>
 {%	else %}
 <tr class="row">
