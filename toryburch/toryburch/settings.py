@@ -14,8 +14,10 @@ BOT_NAME = 'toryburch'
 SPIDER_MODULES = ['toryburch.spiders']
 NEWSPIDER_MODULE = 'toryburch.spiders'
 LOG_LEVEL = 'ERROR'
-ITEM_PIPELINES = {'toryburch.pipelines.ToryburchPipeline'}
-
+#ITEM_PIPELINES = ['toryburch.pipelines.ToryburchPipeline']
+ITEM_PIPELINES = {
+    'toryburch.pipelines.ToryburchPipeline': 300,
+}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'toryburch (+http://www.yourdomain.com)'
